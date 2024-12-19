@@ -127,7 +127,7 @@ async def process_topup(message: types.Message):
             'price_data': {
                 'currency': 'usd',
                 'product_data': {'name': f"Balance Top-Up {amount} USD"},
-                'unit_amount': amount * 100,  # Stripe requires amount in cents
+                'unit_amount': amount * 100,
             },
             'quantity': 1,
         }],

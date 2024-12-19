@@ -32,7 +32,7 @@ else:
     print(f"File {csv_filename} not found at {file_path}")
 
 # Step 3: Data Preprocessing
-df_residential = df[df['PropType'] == 'Residential'].copy()  # Create a copy to avoid the SettingWithCopyWarning
+df_residential = df[df['PropType'] == 'Residential'].copy() 
 
 # Check for missing values in the filtered dataset
 if 'df_residential' in locals():
@@ -49,7 +49,7 @@ if 'df_residential' in locals():
     df_yearly = df_residential.groupby('Year').agg(
         avg_price=('Sale_price', 'mean'),
         total_sales=('Sale_price', 'count'),
-        avg_area=('Fin_sqft', 'mean')  # Changed from 'area' to 'Fin_sqft'
+        avg_area=('Fin_sqft', 'mean') 
     ).reset_index()
 
     # Visualize the average price by year
@@ -93,7 +93,7 @@ if 'df_residential' in locals():
     df_suitable = df_encoded[features]
 
     # Step 8: Impute missing values using SimpleImputer
-    imputer = SimpleImputer(strategy='mean')  # Use mean for numeric columns
+    imputer = SimpleImputer(strategy='mean')
     df_suitable_imputed = pd.DataFrame(imputer.fit_transform(df_suitable), columns=df_suitable.columns)
 
     # Step 9: Clustering using KMeans (4 clusters for illustration)

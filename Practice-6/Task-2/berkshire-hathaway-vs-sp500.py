@@ -127,7 +127,7 @@ if 'df' in locals():
     plt.show()
 
     # Step 12: Split the dataset into features (X) and target (y)
-    X = df_encoded.drop('Berkshire_vs_SP500', axis=1)  # Use the correct target column
+    X = df_encoded.drop('Berkshire_vs_SP500', axis=1)
     y = df_encoded['Berkshire_vs_SP500']
 
     # Step 13: Impute missing values in X (features)

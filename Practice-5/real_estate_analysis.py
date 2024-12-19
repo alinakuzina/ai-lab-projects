@@ -17,16 +17,16 @@ print("Path to dataset files:", path)
 
 # Step 2: List the contents of the directory where the dataset was downloaded
 print("Listing contents of dataset directory:", path)
-print(os.listdir(path))  # This will list all files in the main dataset directory
+print(os.listdir(path))
 
 # Step 3: Load the correct dataset (class_flat.csv)
-dataset_file_path = path + '/class_flat.csv'  # Correct file name based on the output
+dataset_file_path = path + '/class_flat.csv'
 
 if os.path.exists(dataset_file_path):
     df = pd.read_csv(dataset_file_path)
     print("Dataset loaded successfully!")
-    print(df.head())  # Check the first few rows of the dataset
-    print("\nColumns in the dataset:", df.columns)  # Print the columns to check for the available columns
+    print(df.head())  
+    print("\nColumns in the dataset:", df.columns) 
 else:
     print(f"Error: {dataset_file_path} not found.")
     exit()
@@ -38,13 +38,13 @@ print("\nMissing values in the dataset:")
 print(df.isnull().sum())
 
 # You can fill missing values or drop them depending on your approach
-df_cleaned = df.dropna()  # Drop rows with missing values (optional: fill with mean/median)
+df_cleaned = df.dropna() 
 
 # b) Update categorical columns (based on the available columns)
 # We will use the actual column names from the dataset instead of 'property_type' and 'city'
 # Replace 'property_type' and 'city' with valid categorical column names from the printed list
 
-df_encoded = pd.get_dummies(df_cleaned, columns=['complex', 'city'], drop_first=True)  # Adjust with actual columns
+df_encoded = pd.get_dummies(df_cleaned, columns=['complex', 'city'], drop_first=True) 
 
 # c) Normalize numerical features
 scaler = StandardScaler()
@@ -53,7 +53,7 @@ df_encoded[['price', 'rooms', 'area_total']] = scaler.fit_transform(df_encoded[[
 # Step 5: Exploratory Data Analysis (EDA)
 
 # Ensure that we only select numeric columns for correlation calculation
-numeric_columns = df_encoded.select_dtypes(include=[np.number]).columns  # Select only numeric columns
+numeric_columns = df_encoded.select_dtypes(include=[np.number]).columns
 
 # Correlation matrix
 plt.figure(figsize=(10, 8))
@@ -69,7 +69,7 @@ plt.show()
 
 # Step 6: Build Simple Linear Regression Model (one feature: area)
 
-X = df_encoded[['area_total']]  # Simple regression with 'area_total' as the feature
+X = df_encoded[['area_total']]
 y = df_encoded['price']
 
 # Split data into training and test sets
@@ -98,7 +98,7 @@ plt.show()
 
 # Step 7: Build Multiple Linear Regression Model (multiple features)
 
-X_multi = df_encoded[['area_total', 'rooms']]  # Include more features if needed
+X_multi = df_encoded[['area_total', 'rooms']]
 y_multi = df_encoded['price']
 
 # Split data into training and test sets

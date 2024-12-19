@@ -16,8 +16,8 @@ path = kagglehub.dataset_download("redwankarimsony/heart-disease-data")
 print("Path to dataset files:", path)
 
 # Step 2: List the files in the extracted dataset folder to find the correct CSV file
-extracted_path = os.path.join(path, 'extracted_data')  # Check if the file is in 'extracted_data' folder
-if not os.path.exists(extracted_path):  # If the folder doesn't exist, check the root folder
+extracted_path = os.path.join(path, 'extracted_data') 
+if not os.path.exists(extracted_path):
     extracted_path = path
 
 # List all files in the dataset directory
@@ -28,10 +28,9 @@ file_list = os.listdir(extracted_path)
 print(file_list)
 
 # Check for the correct file name
-csv_filename = 'heart_disease_uci.csv'  # The correct file name based on the listing
+csv_filename = 'heart_disease_uci.csv' 
 if csv_filename not in file_list:
     print(f"'{csv_filename}' not found. Available files: {file_list}")
-    # You can manually choose another file if necessary or update the filename here.
 
 # Construct the correct file path
 file_path = os.path.join(extracted_path, csv_filename)
@@ -40,7 +39,7 @@ file_path = os.path.join(extracted_path, csv_filename)
 if os.path.exists(file_path):
     df = pd.read_csv(file_path)
     print("Dataset loaded successfully!")
-    print(df.head())  # Display the first few rows of the dataset
+    print(df.head()) 
 else:
     print(f"File {csv_filename} not found at {file_path}")
 
@@ -64,7 +63,7 @@ if 'df' in locals():
     plt.show()
 
     # Step 4: Handle the target column properly, check if it's renamed after encoding
-    target_column = 'num'  # After encoding, the target column is 'num'
+    target_column = 'num'
     if target_column not in df.columns:
         print(f"Expected column '{target_column}' not found. Available columns: {df.columns}")
 
@@ -129,7 +128,7 @@ if 'df' in locals():
         print("Columns 'age' or 'chol' are missing from the dataset.")
 
     # Step 12: Split the dataset into features (X) and target (y)
-    X = df_encoded.drop(target_column, axis=1)  # Use the correct target column
+    X = df_encoded.drop(target_column, axis=1)
     y = df_encoded[target_column]
 
     # Step 13: Impute missing values in X (features)
